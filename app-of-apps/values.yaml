@@ -6,16 +6,16 @@ spec:
     # HIGHLIGHT
     repoURL: git@github.com:7navyasa/crossplane-demo.git
     # HIGHLIGHT
-    targetRevision: main
+    targetRevision: dev
 
 # HIGHLIGHT
 applications:
   - name: assets
-  - name: carts-old
+  - name: carts
   - name: catalog
   - name: checkout
   - name: orders
   - name: other
   - name: rabbitmq
   - name: ui
-  # - name: crossplane-dynamodb
+  - name: crossplane-dynamodb
