@@ -21,5 +21,4 @@ spec:
       ]
     }
   policies:
-    - reference:
-        name: s3-access-policy
+  - s3-access-policy
