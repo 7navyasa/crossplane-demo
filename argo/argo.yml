@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/7navyasa/crossplane-demo.git'  # Replace with your Git repo
-    path: 'ack-argo'  # Assuming manifests are at the root
+    path: 'ack'  # Assuming manifests are at the root
     targetRevision: ack-helm
   destination:
     server: 'https://kubernetes.default.svc'
