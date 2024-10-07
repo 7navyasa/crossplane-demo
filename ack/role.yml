@@ -20,5 +20,8 @@ spec:
         }
       ]
     }
-  policies:
-  - arn:aws:iam::aws:policy/s3-access-policy
+  # policies:
+  # - arn:aws:iam::aws:policy/s3-access-policy
+  policyRefs:
+  from: 
+    name: s3-access-policy
