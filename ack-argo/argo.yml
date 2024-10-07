@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: s3-iam-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/7navyasa/crossplane-demo.git'  # Replace with your Git repo
+    path: 'ack-argo'  # Assuming manifests are at the root
+    targetRevision: HEAD
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: ack-s3-demo  # Replace with your target namespace
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true
