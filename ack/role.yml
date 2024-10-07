@@ -7,15 +7,19 @@ metadata:
     argocd.argoproj.io/sync-wave: "2"
 spec:
   name: s3-access-role
-  assumeRolePolicyDocument:
-    version: "2012-10-17"
-    statement:
-      - effect: Allow
-        principal:
-          service:
-            - ec2.amazonaws.com
-        action:
-          - "sts:AssumeRole"
+  assumeRolePolicyDocument: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Service": "ec2.amazonaws.com"
+          },
+          "Action": "sts:AssumeRole"
+        }
+      ]
+    }
   policies:
     - reference:
         name: s3-access-policy
