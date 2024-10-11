@@ -1,6 +1,7 @@
 apiVersion: batch/v1
 kind: Job
 metadata:
+  namespace: ack-helm-demo
   name: extract-role-arn
   annotations:
     argocd.argoproj.io/sync-wave: "3"
@@ -13,7 +14,6 @@ spec:
       containers:
         - name: extract-role-arn
           image: bitnami/kubectl:latest
-          namespace: 
           command:
             - /bin/sh
             - -c
