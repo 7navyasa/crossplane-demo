@@ -26,33 +26,3 @@ spec:
               kubectl create secret generic iam-role-arn --from-literal=roleArn=$ROLE_ARN --dry-run=client -o yaml | kubectl apply -f -
       restartPolicy: OnFailure
 
-
-
-apiVersion: batch/v1
-kind: Job
-metadata:
-  name: extract-role-arn
-  namespace: ack-helm-demo
-  annotations:
-    argocd.argoproj.io/sync-wave: "3"
-    argocd.argoproj.io/hook: Sync
-    argocd.argoproj.io/hook-delete-policy: HookSucceeded
-spec:
-  template:
-    metadata:
-      namespace: ack-helm-demo
-    spec:
-      serviceAccountName: s3-access-sa
-      containers:
-        - name: extract-role-arn
-          image: bitnami/kubectl:latest
-          command:
-            - /bin/sh
-            - -c
-            - |
-              until ROLE_ARN=$(kubectl get roles.iam.services.k8s.aws s3-access-role-2 -o jsonpath='{.status.ackResourceMetadata.arn}' | tr -d '\n' | tr -d '\r'); do
-                echo "Waiting for IAM Role ARN..."
-                sleep 5
-              done
-              kubectl create secret generic iam-role-arn --from-literal=roleArn=$ROLE_ARN --namespace ack-helm-demo --dry-run=client -o yaml | kubectl apply -f -
-      restartPolicy: OnFailure
