@@ -1,0 +1,34 @@
+{{- $policyArnSecret := lookup "v1" "Secret" .Release.Namespace "iam-policy-arn" }}
+{{- if $policyArnSecret }}
+{{- $policyArn := index $policyArnSecret.data "policyArn" | b64dec }}
+apiVersion: iam.services.k8s.aws/v1alpha1
+kind: Role
+metadata:
+  name: s3-access-role
+  annotations:
+    argocd.argoproj.io/sync-wave: "3"
+spec:
+  roleName: s3-access-role
+  assumeRolePolicyDocument: |
+    {
+      "Version": "2012-10-17",
+      "Statement": [
+        {
+          "Effect": "Allow",
+          "Principal": {
+            "Federated": "{{ .Values.irsa.clusterOIDCProvider }}"
+          },
+          "Action": "sts:AssumeRoleWithWebIdentity",
+          "Condition": {
+            "StringEquals": {
+              "{{ .Values.irsa.clusterOIDCProvider }}:sub": "system:serviceaccount:{{ .Values.irsa.namespace }}:{{ .Values.irsa.serviceAccountName }}"
+            }
+          }
+        }
+      ]
+    }
+  policies:
+    - "{{ $policyArn }}"
+{{- else }}
+{{ fail "Policy ARN not available yet" }}
+{{- end }}

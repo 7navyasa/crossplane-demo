@@ -1,0 +1,27 @@
+apiVersion: batch/v1
+kind: Job
+metadata:
+  name: extract-role-arn
+  annotations:
+    argocd.argoproj.io/sync-wave: "4"
+    argocd.argoproj.io/hook: Sync
+    argocd.argoproj.io/hook-delete-policy: HookSucceeded
+spec:
+  template:
+    spec:
+      serviceAccountName: {{ .Values.serviceAccountName }}
+      containers:
+        - name: extract-role-arn
+          image: bitnami/kubectl:latest
+          command:
+            - /bin/sh
+            - -c
+            - |
+              until kubectl get role.iam.services.k8s.aws s3-access-role -o jsonpath='{.status.ackResourceMetadata.arn}'; do
+                echo "Waiting for IAM Role ARN..."
+                sleep 5
+              done
+              ROLE_ARN=$(kubectl get role.iam.services.k8s.aws s3-access-role -o jsonpath='{.status.ackResourceMetadata.arn}')
+              kubectl create secret generic iam-role-arn --from-literal=roleArn=$ROLE_ARN --dry-run=client -o yaml | kubectl apply -f -
+      restartPolicy: OnFailure
+

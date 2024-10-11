@@ -1,0 +1,20 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: s3-iam-irsa-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: 'https://github.com/7navyasa/crossplane-demo.git'  # Replace with your Git repo
+    targetRevision: ack-helm
+    chart: ack-helm/s3-iam-chart
+  destination:
+    server: 'https://kubernetes.default.svc'
+    namespace: ack-helm-demo   # Replace with your target namespace
+  syncPolicy:
+    automated:
+      prune: true
+      selfHeal: true
+    syncOptions:
+      - CreateNamespace=true

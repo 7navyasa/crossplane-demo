@@ -1,0 +1,21 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app
+  template:
+    metadata:
+      labels:
+        app: my-app
+spec:
+  serviceAccountName: {{ .Values.irsa.serviceAccountName }}
+  containers:
+    - name: my-app-container
+      image: amazonlinux
+      command: [ "/bin/sh", "-c", "aws s3 ls s3://{{ .Values.s3.bucketName }}" ]

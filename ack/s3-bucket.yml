@@ -1,10 +1,10 @@
+{{- if .Values.s3.enable }}
 apiVersion: s3.services.k8s.aws/v1alpha1
 kind: Bucket
 metadata:
-  name: nav-ackdemo-bucket
+  name: {{ .Values.s3.bucketName }}
   annotations:
     argocd.argoproj.io/sync-wave: "0"
 spec:
-  name: nav-ackdemo-bucket
-
-
+  name: {{ .Values.s3.bucketName }}
+{{- end }}
