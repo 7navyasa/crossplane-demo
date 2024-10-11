@@ -5,7 +5,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "1"
 spec:
-  policyName: s3-access-policy
+  name: s3-access-policy
   policyDocument: |
     {
       "Version": "2012-10-17",
