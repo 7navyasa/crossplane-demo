@@ -8,7 +8,7 @@ spec:
   source:
     repoURL: 'https://github.com/7navyasa/crossplane-demo.git'  # Replace with your Git repo
     targetRevision: ack-helm
-    chart: ack-helm/s3-iam-chart
+    path: ack-helm
   destination:
     server: 'https://kubernetes.default.svc'
     namespace: ack-helm-demo   # Replace with your target namespace

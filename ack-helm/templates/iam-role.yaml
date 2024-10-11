@@ -1,12 +1,10 @@
-{{- $policyArnSecret := lookup "v1" "Secret" .Release.Namespace "iam-policy-arn" }}
-{{- if $policyArnSecret }}
-{{- $policyArn := index $policyArnSecret.data "policyArn" | b64dec }}
+
 apiVersion: iam.services.k8s.aws/v1alpha1
 kind: Role
 metadata:
   name: s3-access-role
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "2"
 spec:
   roleName: s3-access-role
   assumeRolePolicyDocument: |
@@ -28,7 +26,4 @@ spec:
       ]
     }
   policies:
-    - "{{ $policyArn }}"
-{{- else }}
-{{ fail "Policy ARN not available yet" }}
-{{- end }}
+    - "arn:aws:iam::{{ .Values.awsAccountId }}:policy/s3-access-policy"
