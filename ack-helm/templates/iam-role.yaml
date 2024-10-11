@@ -2,7 +2,7 @@
 apiVersion: iam.services.k8s.aws/v1alpha1
 kind: Role
 metadata:
-  name: s3-access-role
+  name: s3-access-role-2
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
