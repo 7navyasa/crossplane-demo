@@ -10,7 +10,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: s3-access-sa
+      serviceAccountName: default
       containers:
         - name: extract-role-arn
           image: bitnami/kubectl:latest
