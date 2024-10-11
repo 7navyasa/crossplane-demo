@@ -4,7 +4,7 @@ s3:
 irsa:
   enable: true
   serviceAccountName: s3-access-sa
-  namespace: s3-helm
+  namespace: ack-helm-demo
   clusterOIDCProvider: arn:aws:iam::274028155301:oidc-provider/https://oidc.eks.us-east-1.amazonaws.com/id/A93632BA645D582F48F3F672566CAA35
 eksClusterName: "ack-helm"
 awsRegion: "us-east-1"
