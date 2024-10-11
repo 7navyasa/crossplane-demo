@@ -13,6 +13,7 @@ spec:
       containers:
         - name: extract-role-arn
           image: bitnami/kubectl:latest
+          namespace: 
           command:
             - /bin/sh
             - -c
@@ -21,6 +22,6 @@ spec:
                 echo "Waiting for IAM Role ARN..."
                 sleep 5
               done
-              ROLE_ARN=$(kubectl get role.iam.services.k8s.aws s3-access-role -o jsonpath='{.status.ackResourceMetadata.arn}')
+              ROLE_ARN=$(kubectl get role.iam.services.k8s.aws s3-access-role-2 -o jsonpath='{.status.ackResourceMetadata.arn}')
               kubectl create secret generic iam-role-arn --from-literal=roleArn=$ROLE_ARN --dry-run=client -o yaml | kubectl apply -f -
       restartPolicy: OnFailure
