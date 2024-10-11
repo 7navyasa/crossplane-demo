@@ -10,7 +10,7 @@ metadata:
 spec:
   template:
     spec:
-      serviceAccountName: {{ .Values.serviceAccountName }}
+      serviceAccountName: s3-access-sa
       containers:
         - name: extract-role-arn
           image: bitnami/kubectl:latest
