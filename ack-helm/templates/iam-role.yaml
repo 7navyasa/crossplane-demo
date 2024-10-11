@@ -6,7 +6,7 @@ metadata:
   annotations:
     argocd.argoproj.io/sync-wave: "2"
 spec:
-  roleName: s3-access-role
+  name: s3-access-role
   assumeRolePolicyDocument: |
     {
       "Version": "2012-10-17",
