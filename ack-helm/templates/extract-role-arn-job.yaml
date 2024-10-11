@@ -18,7 +18,7 @@ spec:
             - /bin/sh
             - -c
             - |
-              until kubectl get role.iam.services.k8s.aws s3-access-role -o jsonpath='{.status.ackResourceMetadata.arn}'; do
+              until kubectl get role.iam.services.k8s.aws s3-access-role-2 -o jsonpath='{.status.ackResourceMetadata.arn}'; do
                 echo "Waiting for IAM Role ARN..."
                 sleep 5
               done
