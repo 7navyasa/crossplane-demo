@@ -2,7 +2,7 @@ apiVersion: batch/v1
 kind: Job
 metadata:
   namespace: ack-helm-demo
-  name: extract-role-arn
+  name: extract-role-arn-and-create-serviceaccount
   annotations:
     argocd.argoproj.io/sync-wave: "5"
     argocd.argoproj.io/hook: Sync
@@ -12,7 +12,7 @@ spec:
     spec:
       serviceAccountName: default
       containers:
-        - name: extract-role-arn
+        - name: extract-role-arn-and-create-serviceaccount
           image: bitnami/kubectl:latest
           command:
             - /bin/sh
@@ -24,5 +24,14 @@ spec:
               done
               ROLE_ARN=$(kubectl get roles.iam.services.k8s.aws s3-access-role-2 -o jsonpath='{.status.ackResourceMetadata.arn}')
               kubectl create secret generic iam-role-arn --from-literal=roleArn=$ROLE_ARN --dry-run=client -o yaml | kubectl apply -f -
+              
+              cat <<EOF | kubectl apply -f -
+              apiVersion: v1
+              kind: ServiceAccount
+              metadata:
+                name: s3-access-sa
+                namespace: ack-helm-demo
+                annotations:
+                  eks.amazonaws.com/role-arn: $ROLE_ARN
+              EOF
       restartPolicy: OnFailure
-

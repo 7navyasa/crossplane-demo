@@ -1,0 +1,27 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: my-app
+  namespace: ack-helm-demo
+  annotations:
+    argocd.argoproj.io/sync-wave: "6"
+    "helm.sh/hook": post-install, post-upgrade
+    "helm.sh/hook-weight": "2"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: my-app  # Label selector for matching the template labels
+  template:
+    metadata:
+      labels:
+        app: my-app  # These labels must match the selector above
+    spec:
+      serviceAccountName: s3-access-sa  # Use the correct Service Account for IRSA
+      containers:
+        - name: my-app-container
+          image: amazonlinux
+          command: ["/bin/sh", "-c", "aws s3 ls s3://{{ .Values.s3.bucketName }}"]
+          # Add ports if needed
+          ports:
+            - containerPort: 80  # Example container port, change as per your application's needs
