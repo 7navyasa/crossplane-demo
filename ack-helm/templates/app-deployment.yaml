@@ -20,11 +20,10 @@ spec:
       serviceAccountName: s3-access-sa  # Use the correct Service Account for IRSA
       containers:
         - name: my-app-container
-          image: amazonlinux
+          image: amazon/aws-cli:latest
           command: ["/bin/sh", "-c"]
           args:
             - |
-              yum install -y aws-cli
               aws s3 ls s3://{{ .Values.s3.bucketName }}
           ports:
             - containerPort: 80  # Example container port, change as per your application's needs
