@@ -21,7 +21,12 @@ spec:
       containers:
         - name: my-app-container
           image: amazonlinux
-          command: ["/bin/sh", "-c", "aws s3 ls s3://{{ .Values.s3.bucketName }}"]
-          # Add ports if needed
+          command: ["/bin/sh", "-c"]
+          args:
+            - |
+              yum install -y aws-cli
+              aws s3 ls s3://{{ .Values.s3.bucketName }}
           ports:
             - containerPort: 80  # Example container port, change as per your application's needs
+
+
