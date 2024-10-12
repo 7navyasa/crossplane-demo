@@ -4,7 +4,7 @@ metadata:
   name: my-app
   namespace: ack-helm-demo
   annotations:
-    argocd.argoproj.io/sync-wave: "6"
+    argocd.argoproj.io/sync-wave: "8"
     "helm.sh/hook": post-install, post-upgrade
     "helm.sh/hook-weight": "2"
 spec:

@@ -4,7 +4,7 @@ metadata:
   namespace: ack-helm-demo
   name: extract-role-arn
   annotations:
-    argocd.argoproj.io/sync-wave: "3"
+    argocd.argoproj.io/sync-wave: "5"
     argocd.argoproj.io/hook: Sync
     argocd.argoproj.io/hook-delete-policy: HookSucceeded
 spec:

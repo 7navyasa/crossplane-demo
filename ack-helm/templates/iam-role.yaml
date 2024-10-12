@@ -4,7 +4,7 @@ kind: Role
 metadata:
   name: s3-access-role-2
   annotations:
-    argocd.argoproj.io/sync-wave: "2"
+    argocd.argoproj.io/sync-wave: "4"
 spec:
   name: s3-access-role
   assumeRolePolicyDocument: |

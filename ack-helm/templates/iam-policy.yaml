@@ -3,7 +3,7 @@ kind: Policy
 metadata:
   name: s3-access-policy
   annotations:
-    argocd.argoproj.io/sync-wave: "1"
+    argocd.argoproj.io/sync-wave: "3"
 spec:
   name: s3-access-policy
   policyDocument: |
