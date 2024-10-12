@@ -7,7 +7,7 @@ spec:
   project: default
   source:
     repoURL: 'https://github.com/your-repo/main-infra-repo.git'
-    targetRevision: main
+    targetRevision: ack-helm
     path: argo/applications
   destination:
     server: 'https://kubernetes.default.svc'
