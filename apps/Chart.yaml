@@ -4,9 +4,9 @@ description: A Helm chart to deploy an S3 bucket, IAM policy, and IAM role using
 version: 0.1.0
 appVersion: "1.0"
 dependencies:
-  - name: myapp
+  - name: app
     version: 0.1.0
     repository: "file://./charts/app"
-  - name: sa-app
+  - name: sa
     version: 0.1.0
     repository: "file://./charts/sa"
