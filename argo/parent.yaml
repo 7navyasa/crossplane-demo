@@ -6,7 +6,7 @@ metadata:
 spec:
   project: default
   source:
-    repoURL: 'https://github.com/your-repo/main-infra-repo.git'
+    repoURL: 'https://github.com/7navyasa/crossplane-demo.git'
     targetRevision: ack-helm
     path: argo/applications
   destination:
