@@ -1,5 +1,5 @@
 apiVersion: v2
-name: s3-iam-chart
+name: app
 description: A Helm chart to deploy an S3 bucket, IAM policy, and IAM role using ACK and Argo CD.
 version: 0.1.0
 appVersion: "1.0"
