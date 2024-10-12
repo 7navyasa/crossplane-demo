@@ -1,0 +1,9 @@
+s3:
+  bucketName: navya-s3-bucket-argo-test
+irsa:
+  enable: true
+  serviceAccountName: s3-access-sa
+  namespace: ack-helm-demo
+eksClusterName: "ack-helm"
+awsRegion: "us-east-1"
+awsAccountId: "274028155301"
