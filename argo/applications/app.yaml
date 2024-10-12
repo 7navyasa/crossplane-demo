@@ -20,3 +20,4 @@ spec:
       - CreateNamespace=true
   annotations:
     argocd.argoproj.io/sync-wave: "6"  # Deploy after Child Application 1 completes
+    argocd.argoproj.io/sync-options: "dependencies:s3-role-app"
