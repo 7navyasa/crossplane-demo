@@ -19,7 +19,7 @@ spec:
           "Action": "sts:AssumeRoleWithWebIdentity",
           "Condition": {
             "StringEquals": {
-              "{{ printf "%s:sub" (splitList "/" .Values.clusterOIDCProvider | last) }}": "system:serviceaccount:{{ .Values.serviceAccountNamespace }}:{{ .Values.serviceAccountName }}"
+              "{{ printf "%s:sub" (splitList "/" .Values.irsa.clusterOIDCProvider | last) }}": "system:serviceaccount:{{ .Values.serviceAccountNamespace }}:{{ .Values.serviceAccountName }}"
             }
           }
         }
