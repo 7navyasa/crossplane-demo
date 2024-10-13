@@ -14,12 +14,12 @@ spec:
         {
           "Effect": "Allow",
           "Principal": {
-            "Federated": "{{ .Values.irsa.clusterOIDCProvider }}"
+            "Federated": "{{ .Values.clusterOIDCProvider }}"
           },
           "Action": "sts:AssumeRoleWithWebIdentity",
           "Condition": {
             "StringEquals": {
-              "{{ .Values.clusterOIDCProvider | replace "oidc-provider" "id" | replace "arn:aws:iam::[0-9]+:" "" }}:sub": "system:serviceaccount:{{ .Values.irsa.namespace }}:{{ .Values.irsa.serviceAccountName }}"
+              "{{ printf "%s:sub" (splitList "/" .Values.clusterOIDCProvider | last) }}": "system:serviceaccount:{{ .Values.serviceAccountNamespace }}:{{ .Values.serviceAccountName }}"
             }
           }
         }
