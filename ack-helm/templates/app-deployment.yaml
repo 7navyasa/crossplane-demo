@@ -5,27 +5,43 @@ metadata:
   namespace: ack-helm-demo
   annotations:
     argocd.argoproj.io/sync-wave: "6"
-    "helm.sh/hook": post-install, post-upgrade
-    "helm.sh/hook-weight": "2"
+    # "helm.sh/hook": post-install, post-upgrade
+    # "helm.sh/hook-weight": "2"
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: my-app  # Label selector for matching the template labels
+      app: my-app-test  # Label selector for matching the template labels
   template:
     metadata:
       labels:
-        app: my-app  # These labels must match the selector above
+        app: my-app-test  # These labels must match the selector above
     spec:
       serviceAccountName: s3-access-sa  # Use the correct Service Account for IRSA
       containers:
-        - name: my-app-container
-          image: amazon/aws-cli:latest
-          command: ["/bin/sh", "-c"]
-          args:
-            - |
-              aws s3 ls s3://{{ .Values.s3.bucketName }}
-          ports:
-            - containerPort: 80  # Example container port, change as per your application's needs
+      - name: aws-cli
+        image: amazon/aws-cli:latest
+        command: ["/bin/sh"]
+        args:
+          - "-c"
+          - |
+            echo "This is a test file" > test.txt
+            aws s3 cp test.txt s3://{{ .Values.s3.bucketName }}/
+            while true; do aws s3 ls s3://{{ .Values.s3.bucketName }}/; sleep 120; done
+        resources:
+          requests:
+            memory: "64Mi"
+            cpu: "250m"
+          limits:
+            memory: "64Mi"
+            cpu: "250m"
+        # - name: my-app-container
+        #   image: amazon/aws-cli:latest
+        #   command: ["/bin/sh", "-c"]
+        #   args:
+        #     - |
+        #       aws s3 ls s3://{{ .Values.s3.bucketName }}
+        #   ports:
+        #     - containerPort: 80  # Example container port, change as per your application's needs
 
 
