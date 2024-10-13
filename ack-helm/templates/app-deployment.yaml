@@ -35,13 +35,6 @@ spec:
             limits:
               memory: "64Mi"
               cpu: "250m"
-          # - name: my-app-container
-          #   image: amazon/aws-cli:latest
-          #   command: ["/bin/sh", "-c"]
-          #   args:
-          #     - |
-          #       aws s3 ls s3://{{ .Values.s3.bucketName }}
-          #   ports:
-          #     - containerPort: 80  # Example container port, change as per your application's needs
+
 
 
