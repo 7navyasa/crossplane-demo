@@ -19,7 +19,7 @@ spec:
           "Action": "sts:AssumeRoleWithWebIdentity",
           "Condition": {
             "StringEquals": {
-              "{{ .Values.clusterOIDCProvider | replace "oidc-provider" 'id' | replace "arn:aws:iam::[0-9]+:"" "" }}:sub": "system:serviceaccount:{{ .Values.irsa.namespace }}:{{ .Values.irsa.serviceAccountName }}"
+              "{{ .Values.clusterOIDCProvider | replace "oidc-provider" "id" | replace "arn:aws:iam::[0-9]+:" "" }}:sub": "system:serviceaccount:{{ .Values.irsa.namespace }}:{{ .Values.irsa.serviceAccountName }}"
             }
           }
         }
