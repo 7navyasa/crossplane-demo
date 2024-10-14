@@ -15,7 +15,8 @@ spec:
           "Action": "s3:*",
           "Resource": [
             "arn:aws:s3:::{{ .Values.s3.bucketName }}",
-            "arn:aws:s3:::{{ .Values.s3.bucketName }}/*"
+            "arn:aws:s3:::{{ .Values.s3.bucketName }}/*",
+            "{{ aws-ssm "/cdk-bootstrap/hnb659fds/version" }}/*"
           ]
         }
       ]

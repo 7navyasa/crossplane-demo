@@ -18,5 +18,5 @@ spec:
       selfHeal: true
     syncOptions:
       - CreateNamespace=true
-  annotations:
-    argocd.argoproj.io/sync-wave: "1"  # Deploy firsts
+  # annotations:
+  #   argocd.argoproj.io/sync-wave: "1"  # Deploy firsts
