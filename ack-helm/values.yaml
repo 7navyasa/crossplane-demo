@@ -1,9 +1,9 @@
 s3:
   enable: true
   bucketName: navya-s3-bucket-argo-test
-irsa:
-  serviceAccountName: s3-access-sa
-  namespace: ack-helm-demo
-  clusterOIDCProvider: arn:aws:iam::274028155301:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/A93632BA645D582F48F3F672566CAA35
-awsAccountId: "274028155301"
-test: {{ ssm "CFN-petsiteKubectlReadyBarrier6B028055-X494J5cuvgJe" }}
+# irsa:
+#   serviceAccountName: s3-access-sa
+#   namespace: ack-helm-demo
+#   clusterOIDCProvider: arn:aws:iam::274028155301:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/A93632BA645D582F48F3F672566CAA35
+# awsAccountId: "274028155301"
+# irsa.{{ ssm "CFN-petsiteKubectlReadyBarrier6B028055-X494J5cuvgJe" }}

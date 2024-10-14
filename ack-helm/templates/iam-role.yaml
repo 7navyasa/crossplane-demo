@@ -1,3 +1,6 @@
+{{ - $clusterOIDCProvider:= "arn:aws:iam::274028155301:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/A93632BA645D582F48F3F672566CAA35"}}
+{{ - $awsAccountId:= "274028155301"}}
+{{ - $namespace:= "ack-helm-demo"}}
 
 apiVersion: iam.services.k8s.aws/v1alpha1
 kind: Role
@@ -14,16 +17,16 @@ spec:
         {
           "Effect": "Allow",
           "Principal": {
-            "Federated": "{{ .Values.irsa.clusterOIDCProvider }}"
+            "Federated": "{{ $clusterOIDCProvider }}"
           },
           "Action": "sts:AssumeRoleWithWebIdentity",
           "Condition": {
             "StringEquals": {
-              "{{ printf "%s:sub" (splitList "oidc-provider/" .Values.irsa.clusterOIDCProvider | last) }}": "system:serviceaccount:{{ .Values.irsa.namespace }}:{{ .Values.irsa.serviceAccountName }}"
+              "{{ printf "%s:sub" (splitList "oidc-provider/" $clusterOIDCProvider | last) }}": "system:serviceaccount:{{ $namespace }}:{{ $serviceAccountName }}"
             }
           }
         }
       ]
     }
   policies:
-    - "arn:aws:iam::{{ .Values.awsAccountId }}:policy/s3-access-policy"
+    - "arn:aws:iam::{{ $awsAccountId }}:policy/s3-access-policy"
