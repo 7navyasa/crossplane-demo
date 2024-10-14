@@ -1,7 +1,6 @@
-{{ - $clusterOIDCProvider:= "arn:aws:iam::274028155301:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/A93632BA645D582F48F3F672566CAA35"}}
-{{ - $awsAccountId:= "274028155301"}}
-{{ - $namespace:= "ack-helm-demo"}}
-
+{{- $clusterOIDCProvider:= "arn:aws:iam::274028155301:oidc-provider/oidc.eks.us-east-1.amazonaws.com/id/A93632BA645D582F48F3F672566CAA35"}}
+{{- $awsAccountId:= "274028155301"}}
+{{- $namespace:= "ack-helm-demo"}}
 apiVersion: iam.services.k8s.aws/v1alpha1
 kind: Role
 metadata:
